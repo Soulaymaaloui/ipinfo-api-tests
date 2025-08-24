@@ -1,0 +1,165 @@
+{
+  "info": {
+    "_postman_id": "4e7a74ab-6931-4053-8d39-75eeec78024d",
+    "name": "IPinfo API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29967903"
+  },
+  "item": [
+    {
+      "name": "GET Current IP Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Response contains IP and country\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.ip).to.be.a(\"string\");\r",
+              "    pm.expect(jsonData.country).to.be.a(\"string\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/json?token={{api_token}}",
+          "host": ["{{base_url}}"],
+          "path": ["json"],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{api_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Specific IP Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Response matches test IP\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.ip).to.equal(pm.variables.get(\"test_ip\"));\r",
+              "});\r",
+              "pm.test(\"Response has city and region\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.city).to.be.a(\"string\");\r",
+              "    pm.expect(jsonData.region).to.be.a(\"string\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{test_ip}}/json?token={{api_token}}",
+          "host": ["{{base_url}}"],
+          "path": ["{{test_ip}}", "json"],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{api_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ASN Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Response contains IP and country\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.ip).to.be.a(\"string\");\r",
+              "    pm.expect(jsonData.country).to.be.a(\"string\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{test_ip}}/json?token={{api_token}}",
+          "host": ["{{base_url}}"],
+          "path": ["{{test_ip}}", "json"],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{api_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Negative Test: Invalid IP",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response indicates invalid IP\", function () {\r",
+              "    pm.response.to.have.status(404); \r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.error).to.exist;\r",
+              "    pm.expect(jsonData.error.message).to.include(\"valid IP address\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/256.256.256.256/json?token={{api_token}}",
+          "host": ["{{base_url}}"],
+          "path": ["256.256.256.256", "json"],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{api_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

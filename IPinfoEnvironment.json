@@ -1,0 +1,29 @@
+{
+  "id": "553b2ffe-eab6-4daf-a4b5-1b181d933379",
+  "name": "IPinfoEnv",
+  "values": [
+    {
+      "key": "api_token",
+      "value": "e4648a8a31cf6c",
+      "type": "default",
+      "description": "",
+      "enabled": true
+    },
+    {
+      "key": "test_ip",
+      "value": "8.8.8.8",
+      "type": "default",
+      "description": "",
+      "enabled": true
+    },
+    {
+      "key": "base_url",
+      "value": "https://ipinfo.io",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2025-08-24T12:34:34.814Z",
+  "_postman_exported_using": "Postman/11.59.7-250822-1415"
+}
