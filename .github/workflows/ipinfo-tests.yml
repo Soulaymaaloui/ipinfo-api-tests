@@ -32,9 +32,9 @@ jobs:
       - name: Run Newman Tests
         run: |
           newman run IPinfoCollection.json \
-          --environment iIPinfoEnvironment.json \
+          -e IPinfoEnvironment.json \
           --global-var "api_token=${{ secrets.IPINFO_API_TOKEN }}" \
-          --reporters cli,htmlextra \
+          -r cli,htmlextra \
           --reporter-htmlextra-export newman-report.html
 
       # Step 5: Upload the detailed HTML report as an artifact
